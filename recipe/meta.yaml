@@ -20,7 +20,7 @@ requirements:
   host:
     - pip
     - poetry
-    - python >=3.8.10
+    - python
     - wheel
   run:
     - jinja2 >=2.7.1
