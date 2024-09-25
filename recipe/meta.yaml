@@ -52,6 +52,7 @@ about:
   license_family: APACHE
   license_file: LICENSE
   summary: Automatically find diff lines that need test coverage.
+  description: Automatically find diff lines that need test coverage.
 
 extra:
   recipe-maintainers:
