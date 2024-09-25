@@ -10,18 +10,18 @@ source:
   sha256: c6c9f7f1eacd9019d118cafb75908445caa41a79f65f36f9f506c9626dbcbc70
 
 build:
-  noarch: python
   number: 0
   entry_points:
     - diff-cover = diff_cover.diff_cover_tool:main
     - diff-quality = diff_cover.diff_quality_tool:main
-  script: '{{ PYTHON }} -m pip install . --no-deps -vv '
+  script: '{{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv '
 
 requirements:
   host:
     - pip
     - poetry
     - python >=3.8.10
+    - wheel
   run:
     - jinja2 >=2.7.1
     - pluggy >=0.13.1,<2
@@ -33,15 +33,20 @@ requirements:
     - tomli >=1.2.1
 
 test:
+  requirements:
+    - pip
   imports:
     - diff_cover
     - diff_cover.violationsreporters
   commands:
+    - pip check
     - diff-cover --help
     - diff-quality --help
 
 about:
   home: https://github.com/Bachmann1234/diff-cover
+  dev_url: https://github.com/Bachmann1234/diff-cover
+  doc_source_url: https://github.com/Bachmann1234/diff-cover
   license: Apache-2.0
   license_family: APACHE
   license_file: LICENSE
