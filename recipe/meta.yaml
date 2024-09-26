@@ -19,7 +19,7 @@ build:
 requirements:
   host:
     - pip
-    - poetry
+    - poetry-core >=1.0.7
     - python
     - wheel
   run:
