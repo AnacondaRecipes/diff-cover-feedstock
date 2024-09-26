@@ -11,6 +11,7 @@ source:
 
 build:
   number: 0
+  skip: true  # [py<38]
   entry_points:
     - diff-cover = diff_cover.diff_cover_tool:main
     - diff-quality = diff_cover.diff_quality_tool:main
@@ -28,7 +29,6 @@ requirements:
     - pygments >=2.9.0
     - python
     - chardet >=3.0.0
-
   run_constrained:
     - tomli >=1.2.1
 
