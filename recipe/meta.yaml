@@ -33,8 +33,11 @@ requirements:
     - tomli >=1.2.1
 
 test:
+    source_files:
+    - tests
   requires:
     - pip
+    - pytest
   imports:
     - diff_cover
     - diff_cover.violationsreporters
@@ -42,6 +45,7 @@ test:
     - pip check
     - diff-cover --help
     - diff-quality --help
+    - pytest -v tests
 
 about:
   home: https://github.com/Bachmann1234/diff-cover
