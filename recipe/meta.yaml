@@ -46,7 +46,7 @@ test:
 about:
   home: https://github.com/Bachmann1234/diff-cover
   dev_url: https://github.com/Bachmann1234/diff-cover
-  doc_source_url: https://github.com/Bachmann1234/diff-cover
+  doc_url: https://github.com/Bachmann1234/diff-cover
   license: Apache-2.0
   license_family: APACHE
   license_file: LICENSE
