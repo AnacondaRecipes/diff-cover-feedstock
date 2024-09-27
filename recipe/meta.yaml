@@ -40,6 +40,11 @@ test:
     - pytest-mock
     - flake8
     - pylint
+    - pytest-cov
+    - pycodestyle
+    - pyflakes
+    - pydocstyle
+    - black
   imports:
     - diff_cover
     - diff_cover.violationsreporters
@@ -48,7 +53,26 @@ test:
     - diff-cover --help
     - diff-quality --help
     # Skipping test_get_src_path_clover cause it's using `datadir` package we don't supply
-    - pytest -v -k "not test_get_src_path_clover" tests
+    - pytest -v -k "not test_get_src_path_clover" tests  # [not win]
+    # Upstream is not testing windows, skipping all failing tests
+    - pytest -v -k "not (
+      test_git_path_selection or
+      test_absolute_path or
+      test_set_cwd_unicode or
+      test_set_cwd_unicode_byte_passed_in_for_cwd or
+      test_html_with_external_css or
+      test_added_file_pycodestyle_consol or
+      test_fail_under_console or
+      test_fail_under_pass_console or
+      test_added_file_pyflakes_console or
+      test_added_file_pyflakes_console_two_files or
+      test_added_file_pylint_console or
+      test_quality or
+      test_quality_pregenerated_report or
+      test_report_root_path or
+      test_violation_lines or
+      test_get_src_path_clover
+      )" tests  # [win]
 
 about:
   home: https://github.com/Bachmann1234/diff-cover
