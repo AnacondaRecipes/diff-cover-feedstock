@@ -1,5 +1,5 @@
 {% set name = "diff-cover" %}
-{% set version = "7.4.0" %}
+{% set version = "9.1.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,46 +7,64 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/diff_cover-{{ version }}.tar.gz
-  sha256: 3d98800ea3198ab8450733050dd98dec802c9028c7164aace990f2f13a160e98
+  sha256: c6c9f7f1eacd9019d118cafb75908445caa41a79f65f36f9f506c9626dbcbc70
 
 build:
-  noarch: python
   number: 0
+  skip: true  # [py<38]
   entry_points:
     - diff-cover = diff_cover.diff_cover_tool:main
     - diff-quality = diff_cover.diff_quality_tool:main
-  script: '{{ PYTHON }} -m pip install . --no-deps -vv '
+  script: '{{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv '
 
 requirements:
   host:
     - pip
-    - poetry
-    - python >=3.7.2
+    - poetry-core >=1.0.7
+    - python
   run:
     - jinja2 >=2.7.1
     - pluggy >=0.13.1,<2
-    - pygments >=2.9.0
-    - python >=3.7.2
+    - pygments >=2.9.0,<3.0.0
+    - python
     - chardet >=3.0.0
-    - setuptools >=17.0
-
   run_constrained:
     - tomli >=1.2.1
 
 test:
+  source_files:
+    - tests
+  requires:
+    - pip
+    - pytest
+    - pytest-mock
+    - flake8
+    - pylint
+    - pytest-cov
+    - pycodestyle
+    - pyflakes
+    - pydocstyle
+    - black
   imports:
     - diff_cover
     - diff_cover.violationsreporters
   commands:
+    - pip check
     - diff-cover --help
     - diff-quality --help
+    # Skipping test_get_src_path_clover cause it's using `datadir` package we don't supply
+    # Skipping tests for windows cause upstream doesn't support them
+    - pytest -v -k "not test_get_src_path_clover" tests  # [not win]
 
 about:
   home: https://github.com/Bachmann1234/diff-cover
+  dev_url: https://github.com/Bachmann1234/diff-cover
+  doc_url: https://github.com/Bachmann1234/diff-cover
   license: Apache-2.0
   license_family: APACHE
   license_file: LICENSE
   summary: Automatically find diff lines that need test coverage.
+  description: Automatically find diff lines that need test coverage.
 
 extra:
   recipe-maintainers:
