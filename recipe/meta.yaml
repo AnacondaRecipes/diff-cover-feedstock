@@ -14,7 +14,7 @@ build:
   entry_points:
     - diff-cover = diff_cover.diff_cover_tool:main
     - diff-quality = diff_cover.diff_quality_tool:main
-  script: {{ PYTHON }} -m pip install .  -vv --no-deps --no-build-isolation
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   skip: true  # [py<310]
 
 requirements:
