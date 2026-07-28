@@ -1,5 +1,5 @@
 {% set name = "diff-cover" %}
-{% set version = "10.2.0" %}
+{% set version = "10.4.1" %}
 
 package:
   name: {{ name }}
@@ -7,14 +7,14 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
-  sha256: 61bf83025f10510c76ef6a5820680cf61b9b974e8f81de70c57ac926fa63872a
+  sha256: 0ec566955c9ee7da2f6cc48fa16fac7f97ad1fc4e50a887ffb9cfe5eb1e831df
 
 build:
   number: 0
   entry_points:
     - diff-cover = diff_cover.diff_cover_tool:main
     - diff-quality = diff_cover.diff_quality_tool:main
-  script: {{ PYTHON }} -m pip install .  -vv --no-deps --no-build-isolation
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   skip: true  # [py<310]
 
 requirements:
